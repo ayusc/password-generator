@@ -1,6 +1,16 @@
+"""
+My modifications to the given code:
+	
+	1) Include numbers and special characters in passwords
+	2) Provide an option for all passwords to be of same length
+    3) Add checks for invalid inputs 
+	
+~ Ayus Chatterjee	
+"""
+
 import random
 
-def generatePassword(pwlength):
+def generatePassword(pwlength, all_same_length=False):
     string = "abcdefghijklmnopqrstuvwxyz"
     special_characters = "!@#$%&"
     numbers = "0123456789"
@@ -37,23 +47,44 @@ def main():
         
         print("Generating " + str(numPasswords) + " passwords")
         
-        passwordLengths = []
+        while True:
+            choice = input("Do you want all passwords to be of the same length? (yes/y/no/n): ").lower().strip()
+            if choice in ['yes', 'y']:
+                all_same_length = True
+                break
+            elif choice in ['no', 'n']:
+                all_same_length = False
+                break
+            else:
+                print("Invalid choice. Please enter 'yes', 'no' or 'y', 'n'")
 
-        print("Minimum length of password should be 3")
-
-        for i in range(numPasswords):
+        if all_same_length:
             while True:
                 try:
-                    length = int(input("Enter the length of Password #" + str(i+1) + ": "))
+                    length = int(input("Enter the length of all passwords: "))
                     if length < 3:
                         print("Password length must be at least 3 characters.")
                     else:
-                        passwordLengths.append(length)
+                        passwordLengths = [length] * numPasswords
                         break
                 except ValueError:
                     print("Please enter a valid integer for the password length.")
+        else:
+            print("Minimum length of password should be 3")
+            passwordLengths = []
+            for i in range(numPasswords):
+                while True:
+                    try:
+                        length = int(input("Enter the length of Password #" + str(i+1) + ": "))
+                        if length < 3:
+                            print("Password length must be at least 3 characters.")
+                        else:
+                            passwordLengths.append(length)
+                            break
+                    except ValueError:
+                        print("Please enter a valid integer for the password length.")
         
-        Passwords = generatePassword(passwordLengths)
+        Passwords = generatePassword(passwordLengths, all_same_length)
 
         for i, password in enumerate(Passwords):
             print("Password #" + str(i+1) + " = " + password)
