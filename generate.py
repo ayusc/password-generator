@@ -3,7 +3,7 @@ My modifications to the given code:
 	
 	1) Include numbers and special characters in passwords
 	2) Provide an option for all passwords to be of same length
-    3) Add checks for invalid inputs 
+        3) Add checks for invalid inputs 
 	
 ~ Ayus Chatterjee	
 """
